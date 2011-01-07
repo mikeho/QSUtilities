@@ -1,8 +1,3 @@
-QSForm Library for iOS
+QSUtilities Library for iOS
 
-This library provides Form-like functionality within a UITableViewController construct.  Individual Form items can be things like
-  * text fields
-  * switches (e.g. checkboxes)
-  * list selectors (single-select and multi-select)
-  * image capture
-  * etc.
+This library provides general purposes libraries (string cleanup, net access, etc.) within Objective-C classes.
