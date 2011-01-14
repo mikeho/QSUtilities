@@ -1,5 +1,5 @@
 /**
- * QSUtilities.h
+ * QSFileManager.h
  * 
  * Copyright (c) 2010 - 2011, Quasidea Development, LLC
  * For more information, please go to http://www.quasidea.com/
@@ -23,11 +23,20 @@
  * THE SOFTWARE.
  */
 
-#ifndef __QSUTILITIES_INCLUDE__
-#define __QSUTILITIES_INCLUDE__
+#import <Foundation/Foundation.h>
 
-// All Utilities Classes Go Here
-#import "QSStrings.h"
-#import "QSFileManager.h"
 
-#endif __QSUTILITIES_INCLUDE__
+@interface QSFileManager : NSObject {
+
+}
+
++ (NSString *)documentsFilePathForFile:(NSString *)strFile;
+
++ (bool)writeDocumentsFile:(NSString *)strFileName WithData:(NSData *)objData;
++ (NSData *)readDocumentsFile:(NSString *)strFileName;
+
++ (bool)writeFile:(NSString *)strFilePath WithData:(NSData *)objData;
++ (NSData *)readFile:(NSString *)strFilePath;
++ (NSInteger)fileSize:(NSString *)strFilePath;
+
+@end
