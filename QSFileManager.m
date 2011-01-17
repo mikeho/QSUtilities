@@ -26,7 +26,6 @@
 #import "QSFileManager.h"
 
 static NSString * _strDocumentsPath = nil;
-static NSFileManager * _objFileManager = nil;
 
 @implementation QSFileManager
 
@@ -41,15 +40,11 @@ static NSFileManager * _objFileManager = nil;
 }
 
 + (bool)writeFile:(NSString *)strFilePath WithData:(NSData *)objData {
-	if (_objFileManager == nil)
-		_objFileManager = [[NSFileManager alloc] init];
-	return [_objFileManager createFileAtPath:strFilePath contents:objData attributes:nil];
+	return [[NSFileManager defaultManager] createFileAtPath:strFilePath contents:objData attributes:nil];
 }
 
 + (NSData *)readFile:(NSString *)strFilePath {
-	if (_objFileManager == nil)
-		_objFileManager = [[NSFileManager alloc] init];
-	return [_objFileManager contentsAtPath:strFilePath];
+	return [[NSFileManager defaultManager] contentsAtPath:strFilePath];
 }
 
 + (bool)writeDocumentsFile:(NSString *)strFileName WithData:(NSData *)objData {
@@ -61,10 +56,7 @@ static NSFileManager * _objFileManager = nil;
 }
 
 + (NSInteger)fileSize:(NSString *)strFilePath {
-	if (_objFileManager == nil)
-		_objFileManager = [[NSFileManager alloc] init];
-
-	NSDictionary * dctFileAttributes = [_objFileManager attributesOfItemAtPath:strFilePath error:NULL];	
+	NSDictionary * dctFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:strFilePath error:NULL];	
 	return [dctFileAttributes fileSize];
 }
 
