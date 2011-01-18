@@ -108,6 +108,19 @@ static const short _base64DecodingTable[256] = {
 	return [objDateFormatter stringFromDate:dttDate];
 }
 
+
++ (NSString *)ecnodeBase64UrlWithBase64:(NSString *)strBase64 {
+	// Switch a base64 encoded string into a "base 64 url" encoded string
+	// all that really means is no "=" padding and switch "-" for "+" and "_" for "/"
+	
+	// This is not a "standard" per se, but it is a widely used variant.
+	// See http://en.wikipedia.org/wiki/Base64#URL_applications for more information
+
+	return [[[strBase64 stringByReplacingOccurrencesOfString:@"=" withString:@""]
+			 stringByReplacingOccurrencesOfString:@"+" withString:@"-"]
+			stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+}
+
 + (NSString *)encodeBase64WithString:(NSString *)strData {
 	return [QSStrings encodeBase64WithData:[strData dataUsingEncoding:NSUTF8StringEncoding]];
 }
