@@ -29,11 +29,16 @@
 @interface QSStrings : NSObject {
 
 }
+
 + (NSString *)implodeArray:(NSArray *)strArray WithGlue:(NSString *)strGlue;
 + (NSString *)implodeObjectArray:(NSArray *)objArray WithSelector:(SEL)selSelector Glue:(NSString *)strGlue;
 + (NSString *)trimString:(NSString *)strString;
 + (NSString *)escapeForXml:(NSString *)strString;
 + (NSString *)xmlDateStringForDate:(NSDate *)dttDate;
 + (NSString *)htmlEntities:(NSString *)strString;
+
++ (NSString *)encodeBase64WithString:(NSString *)strData;
++ (NSString *)encodeBase64WithData:(NSData *)objData;
++ (NSData *)decodeBase64WithString:(NSString *)strBase64;
 
 @end
