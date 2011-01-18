@@ -185,7 +185,6 @@ static const short _base64DecodingTable[256] = {
 	int i = 0, j = 0, k;
 
 	unsigned char * objResult;
-	// Really?  Doesn't this alloc too much?
 	objResult = calloc(intLength, sizeof(char));
 
 	// Run through the whole string, converting as we go
