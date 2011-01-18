@@ -84,7 +84,7 @@ static const short _base64DecodingTable[256] = {
 + (NSString *)escapeForXml:(NSString *)strString {
 	if (strString == nil) return @"";
 	return [NSString stringWithFormat:@"<![CDATA[%@]]>",
-			[strString stringByReplacingOccurrencesOfString:@"]]>" withString:@"]]><![CDATA["]];
+			[strString stringByReplacingOccurrencesOfString:@"]]>" withString:@"]]]]><![CDATA[>"]];
 }
 
 + (NSString *)xmlDateStringForDate:(NSDate *)dttDate {
