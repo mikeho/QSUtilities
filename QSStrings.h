@@ -41,6 +41,6 @@
 + (NSString *)encodeBase64WithData:(NSData *)objData;
 + (NSData *)decodeBase64WithString:(NSString *)strBase64;
 
-+ (NSString *)ecnodeBase64UrlWithBase64:(NSString *)strBase64
++ (NSString *)encodeBase64UrlWithBase64:(NSString *)strBase64;
 
 @end

@@ -109,7 +109,7 @@ static const short _base64DecodingTable[256] = {
 }
 
 
-+ (NSString *)ecnodeBase64UrlWithBase64:(NSString *)strBase64 {
++ (NSString *)encodeBase64UrlWithBase64:(NSString *)strBase64 {
 	// Switch a base64 encoded string into a "base 64 url" encoded string
 	// all that really means is no "=" padding and switch "-" for "+" and "_" for "/"
 	
