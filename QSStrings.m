@@ -187,8 +187,12 @@ static const short _base64DecodingTable[256] = {
 	// Terminate the string-based result
 	*objPointer = '\0';
 
+	// Cleanup
+	NSString * strToReturn = [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding];
+	free(strResult);
+
 	// Return the results as an NSString object
-	return [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding];
+	return strToReturn;
 }
 
 + (NSData *)decodeBase64WithString:(NSString *)strBase64 {
