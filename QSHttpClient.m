@@ -22,6 +22,7 @@
 @synthesize _objResponseData;
 
 @synthesize _objDelegate;
+@synthesize _intTag;
 
 #pragma mark -
 #pragma mark Initializers and Housekeeping

@@ -30,6 +30,7 @@
 	NSInteger _intRequestDataSize;
 	NSInteger _intResponseDataSize;
 
+	NSInteger _intTag;
 	id <QSHttpClientDelegate> _objDelegate;
 }
 
@@ -40,6 +41,7 @@
 @property (nonatomic, assign, getter=httpStatusCode) NSInteger _intHttpStatusCode;
 @property (nonatomic, retain, getter=responseData) NSData * _objResponseData;
 
+@property (nonatomic, assign, getter=tag, setter=setTag) NSInteger _intTag;
 @property (nonatomic, assign /* weak ref */, getter=delegate, setter=setDelegate) id <QSHttpClientDelegate> _objDelegate;
 
 - (QSHttpClient *)initWithUrl:(NSString *)strUrl HttpMethod:(NSString *)strHttpMethod;
