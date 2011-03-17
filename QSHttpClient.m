@@ -21,8 +21,10 @@
 @synthesize _intHttpStatusCode;
 @synthesize _objResponseData;
 
-@synthesize _objDelegate;
 @synthesize _intTag;
+@synthesize _intArbitraryIdentifier;
+
+@synthesize _objDelegate;
 
 #pragma mark -
 #pragma mark Initializers and Housekeeping
