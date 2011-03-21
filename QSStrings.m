@@ -118,7 +118,7 @@ static const short _base64DecodingTable[256] = {
 
 	NSString * strStep1 = [strBase64 stringByReplacingOccurrencesOfString:@"=" withString:@""];
 	NSString * strStep2 = [strStep1 stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
-	NSString * strStep3 = [strStep3 stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+	NSString * strStep3 = [strStep2 stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
 	return strStep3;
 }
 
