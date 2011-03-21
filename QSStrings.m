@@ -116,9 +116,10 @@ static const short _base64DecodingTable[256] = {
 	// This is not a "standard" per se, but it is a widely used variant.
 	// See http://en.wikipedia.org/wiki/Base64#URL_applications for more information
 
-	return [[[strBase64 stringByReplacingOccurrencesOfString:@"=" withString:@""]
-			 stringByReplacingOccurrencesOfString:@"+" withString:@"-"]
-			stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+	NSString * strStep1 = [strBase64 stringByReplacingOccurrencesOfString:@"=" withString:@""];
+	NSString * strStep2 = [strStep1 stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
+	NSString * strStep3 = [strStep3 stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+	return strStep3;
 }
 
 + (NSString *)encodeBase64WithString:(NSString *)strData {
