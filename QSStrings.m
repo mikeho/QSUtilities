@@ -192,7 +192,7 @@ static const short _base64DecodingTable[256] = {
 	free(strResult);
 
 	// Return the results as an NSString object
-	return strToReturn;
+	return [NSString stringWithString:strToReturn];
 }
 
 + (NSData *)decodeBase64WithString:(NSString *)strBase64 {
