@@ -29,5 +29,6 @@
 // All Utilities Classes Go Here
 #import "QSStrings.h"
 #import "QSFileManager.h"
+#import "QSHttpClient.h"
 
 #endif __QSUTILITIES_INCLUDE__
