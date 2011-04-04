@@ -156,8 +156,9 @@
 		_intResponseDataSize = [response expectedContentLength];
 	}
 	
-	if (_objDelegate && [(NSObject *)_objDelegate respondsToSelector:@selector(httpClient:RequestProgressPercentage:)])
+	if (_objDelegate && [(NSObject *)_objDelegate respondsToSelector:@selector(httpClient:ResponseProgressPercentage:)]) {
 		[_objDelegate httpClient:self ResponseProgressPercentage:0.0f];
+	}
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -169,8 +170,9 @@
 		fltComplete = (1.0 * [_objResponseData length]) / (1.0 * _intResponseDataSize);
 	}
 	
-	if (_objDelegate && [(NSObject *)_objDelegate respondsToSelector:@selector(httpClient:RequestProgressPercentage:)])
+	if (_objDelegate && [(NSObject *)_objDelegate respondsToSelector:@selector(httpClient:ResponseProgressPercentage:)]) {
 		[_objDelegate httpClient:self ResponseProgressPercentage:fltComplete];
+	}
 }
 
 #pragma mark -
