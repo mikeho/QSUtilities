@@ -30,7 +30,7 @@
 #pragma mark Initializers and Housekeeping
 
 - (QSHttpClient *)initWithUrl:(NSString *)strUrl HttpMethod:(NSString *)strHttpMethod {
-	if ([self init]) {
+	if (self = [self init]) {
 		[self setUrl:strUrl];
 		[self setHttpMethod:strHttpMethod];
 		[self setTimeoutInterval:60];
