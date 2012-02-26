@@ -152,7 +152,7 @@ static const short _base64DecodingTable[256] = {
 	char * strResult;
 
 	// Get the Raw Data length and ensure we actually have data
-	int intLength = [objData length];
+	size_t intLength = [objData length];
 	if (intLength == 0) return nil;
 
 	// Setup the String-based Result placeholder and pointer within that placeholder
@@ -184,21 +184,15 @@ static const short _base64DecodingTable[256] = {
 			*objPointer++ = '=';
 		}
 	}
-
-	// Terminate the string-based result
-	*objPointer = '\0';
-
-	// Cleanup
-	NSString * strToReturn = [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding];
-	free(strResult);
-
-	// Return the results as an NSString object
-	return [NSString stringWithString:strToReturn];
+	
+	NSString *strToReturn = [[NSString alloc] initWithBytesNoCopy:strResult length:objPointer - strResult encoding:NSASCIIStringEncoding freeWhenDone:YES];
+	return [strToReturn autorelease];
 }
 
 + (NSData *)decodeBase64WithString:(NSString *)strBase64 {
 	const char * objPointer = [strBase64 cStringUsingEncoding:NSASCIIStringEncoding];
-	int intLength = strlen(objPointer);
+	if (objPointer == NULL)  return nil;
+	size_t intLength = strlen(objPointer);
 	int intCurrent;
 	int i = 0, j = 0, k;
 
@@ -266,9 +260,7 @@ static const short _base64DecodingTable[256] = {
 	}
 
 	// Cleanup and setup the return NSData
-	NSData * objData = [[[NSData alloc] initWithBytes:objResult length:j] autorelease];
-	free(objResult);
-	return objData;
+	return [[[NSData alloc] initWithBytesNoCopy:objResult length:j freeWhenDone:YES] autorelease];
 }
 
 @end
