@@ -24,8 +24,10 @@
  */
 
 #import "QSFileManager.h"
+#include <sys/xattr.h>
 
 static NSString * _strDocumentsPath = nil;
+static NSString * _strOfflineContentPath = nil;
 
 @implementation QSFileManager
 
@@ -35,8 +37,19 @@ static NSString * _strDocumentsPath = nil;
 		_strDocumentsPath = [objPaths objectAtIndex:0];
 		[_strDocumentsPath retain];
 	}
-
+	
 	return [_strDocumentsPath stringByAppendingPathComponent:strFile];
+}
+
+
++ (NSString *)offlineContentFilePathForFile:(NSString *)strFile {
+	if (_strOfflineContentPath == nil) {
+		NSArray * objPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, true);
+		_strOfflineContentPath = [[objPaths objectAtIndex:0] stringByAppendingPathComponent:@"Offline Content"];
+		[_strOfflineContentPath retain];
+	}
+
+	return [_strOfflineContentPath stringByAppendingPathComponent:strFile];
 }
 
 + (bool)writeFile:(NSString *)strFilePath WithData:(NSData *)objData {
@@ -48,11 +61,36 @@ static NSString * _strDocumentsPath = nil;
 }
 
 + (bool)writeDocumentsFile:(NSString *)strFileName WithData:(NSData *)objData {
-	return [QSFileManager writeFile:[QSFileManager documentsFilePathForFile:@"qcodo_large.tif"] WithData:objData];
+	return [QSFileManager writeFile:[QSFileManager documentsFilePathForFile:strFileName] WithData:objData];
 }
 
 + (NSData *)readDocumentsFile:(NSString *)strFileName {
 	return [QSFileManager readFile:[QSFileManager documentsFilePathForFile:strFileName]];
+}
+
++ (bool)writeOfflineContentFile:(NSString *)strFileName WithData:(NSData *)objData {
+	bool blnToReturn;
+	blnToReturn = [QSFileManager writeFile:[QSFileManager offlineContentFilePathForFile:strFileName] WithData:objData];
+
+	// Since we're dealing with Offline Content, we are required to set the "Do Not Back up" Extended Attribute
+	if (blnToReturn) {
+		blnToReturn = [QSFileManager markFileAsDoNotBackup:[QSFileManager offlineContentFilePathForFile:strFileName]];
+	}
+
+	return blnToReturn;
+}
+
++ (bool)markFileAsDoNotBackup:(NSString *)strFileName {
+	const char * strFilePath = [strFileName fileSystemRepresentation];
+	const char * strAttributeName = "com.apple.MobileBackup";
+	u_int8_t attrValue = 1;
+
+	int result = setxattr(strFilePath, strAttributeName, &attrValue, sizeof(attrValue), 0, 0);
+	return (result == 0);
+}
+
++ (NSData *)readOfflineContentFile:(NSString *)strFileName {
+	return [QSFileManager readFile:[QSFileManager offlineContentFilePathForFile:strFileName]];
 }
 
 + (NSInteger)fileSize:(NSString *)strFilePath {

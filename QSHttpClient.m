@@ -112,7 +112,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	if (_objDelegate && [(NSObject *)_objDelegate respondsToSelector:@selector(httpClient:ErrorReceived:)])
-		[_objDelegate httpClient:self ErrorReceived:@"Could not connect to the server."];
+		[_objDelegate httpClient:self ErrorReceived:NSLocalizedString(@"Could not connect to the server.", nil)];
 }
 
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
@@ -139,7 +139,7 @@
 	// Oops -- an HTTP status code indicating an issue / error
 	} else {
 		if (_objDelegate && [(NSObject *)_objDelegate respondsToSelector:@selector(httpClient:ErrorReceived:)])
-			[_objDelegate httpClient:self ErrorReceived:[NSString stringWithFormat:@"Received error status code '%d' from the server.", _intHttpStatusCode]];
+			[_objDelegate httpClient:self ErrorReceived:[NSString stringWithFormat:NSLocalizedString(@"Received error status code '%d' from the server.", nil), _intHttpStatusCode]];
 	}
 }
 

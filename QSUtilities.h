@@ -31,4 +31,4 @@
 #import "QSFileManager.h"
 #import "QSHttpClient.h"
 
-#endif __QSUTILITIES_INCLUDE__
+#endif	// __QSUTILITIES_INCLUDE__

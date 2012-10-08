@@ -31,9 +31,14 @@
 }
 
 + (NSString *)documentsFilePathForFile:(NSString *)strFile;
-
 + (bool)writeDocumentsFile:(NSString *)strFileName WithData:(NSData *)objData;
 + (NSData *)readDocumentsFile:(NSString *)strFileName;
+
++ (NSString *)offlineContentFilePathForFile:(NSString *)strFile;
++ (bool)writeOfflineContentFile:(NSString *)strFileName WithData:(NSData *)objData;
++ (NSData *)readOfflineContentFile:(NSString *)strFileName;
+
++ (bool)markFileAsDoNotBackup:(NSString *)strFileName;
 
 + (bool)writeFile:(NSString *)strFilePath WithData:(NSData *)objData;
 + (NSData *)readFile:(NSString *)strFilePath;
